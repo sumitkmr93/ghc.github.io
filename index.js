@@ -16,4 +16,8 @@ app.get('/login',(req,res)=>{
     res.sendFile(__dirname + '/login.html');
 });
 
+app.get('/listsapp',(req,res)=>{
+    res.sendFile(__dirname + '/listsapp.html');
+});
+
 app.listen(4693);
