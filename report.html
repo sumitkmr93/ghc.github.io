@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Power BI Embedded Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" language="javascript" src="https://rawgit.com/Microsoft/PowerBI-JavaScript/master/dist/powerbi.min.js"></script> </script>
+</head>
+
+<body>
+        <div class="jumbotron">
+                <h1 class="display-1" align="center">Power BI Embedded Demo</h3>
+        </div>
+        <div class="container" style="width: 75%;" >
+                <div id="reportContainer" align="center" style="height: 700px;" ></div>
+        </div>
+    
+</body>
+
+<script>
+    $(document).ready(function () {
+        
+		
+		var getEmbedToken = "https://seaipbiembedded.azurewebsites.net/api/pbiembedded?code=V6GIwbaVjDM34O2SQf8iRX564G9kwE/LrMBOrEVWVbTjERxwN1mJww==";
+
+        $.ajax({
+            url: getEmbedToken,
+			type: 'GET',
+            // <!-- jsonpCallback: 'callback', -->
+            // <!-- contentType: 'application/javascript', -->
+            dataType: "json",
+            success: function (json) {
+
+                var models = window['powerbi-client'].models;
+
+		// <!-- Read Mode -->
+                var config = {
+                    type: 'report',
+                    id: json.ReportId,
+                    embedUrl: json.EmbedUrl,
+                    tokenType: models.TokenType.Embed,
+                    accessToken: json.EmbedToken
+                };
+				
+		// <!-- Edit Mode -->	
+				// 	 var config = { 
+				// 	type: 'report', 
+				// 	tokenType: models.TokenType.Embed, 
+				// 	accessToken: json.EmbedToken,
+				// 	embedUrl: json.EmbedUrl, 
+				// 	id: json.Id,
+				// 	permissions: models.Permissions.All /*gives maximum permissions*/,
+				// 	viewMode: models.ViewMode.Edit, 
+				// 	settings: { 
+				// 		 filterPaneEnabled: true,
+				// 		navContentPaneEnabled: true 
+				// 	 } 
+				//  }; 
+
+                var $reportContainer = $('#reportContainer');
+                var report = powerbi.embed($reportContainer.get(0), config);
+
+
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+
+    });
+</script>
+
+</html>

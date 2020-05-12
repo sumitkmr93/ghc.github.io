@@ -20,4 +20,8 @@ app.get('/listsapp',(req,res)=>{
     res.sendFile(__dirname + '/listsapp.html');
 });
 
+app.get('/report',(req,res)=>{
+    res.sendFile(__dirname + '/report.html')
+});
+
 app.listen(4693);
