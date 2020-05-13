@@ -24,4 +24,8 @@ app.get('/embeddedreport',(req,res)=>{
     res.sendFile(__dirname + '/embeddedreport.html')
 });
 
+app.get('/newreport',(req,res)=>{
+    res.sendFile(__dirname + '/newreport.html')
+});
+
 app.listen(4693);
