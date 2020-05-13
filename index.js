@@ -20,7 +20,7 @@ app.get('/listsapp',(req,res)=>{
     res.sendFile(__dirname + '/listsapp.html');
 });
 
-app.get('/report',(req,res)=>{
+app.get('/embeddedreport',(req,res)=>{
     res.sendFile(__dirname + '/report.html')
 });
 
