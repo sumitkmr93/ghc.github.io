@@ -21,7 +21,7 @@ app.get('/listsapp',(req,res)=>{
 });
 
 app.get('/embeddedreport',(req,res)=>{
-    res.sendFile(__dirname + '/report.html')
+    res.sendFile(__dirname + '/embeddedreport.html')
 });
 
 app.listen(4693);
