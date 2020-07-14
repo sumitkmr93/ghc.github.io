@@ -54,13 +54,11 @@
     $(document).ready(function () {
         
 		
-		var getEmbedToken = "https://pbiembeddedsumit.azurewebsites.net/api/testfn1";
+		var getEmbedToken = "https://pbiembeddedqna.azurewebsites.net/api/generatetoken";
 
         $.ajax({
             url: getEmbedToken,
 			type: 'GET',
-            // <!-- jsonpCallback: 'callback', -->
-            // <!-- contentType: 'application/javascript', -->
             dataType: "json",
             success: function (json) {
 
@@ -74,25 +72,9 @@
                     tokenType: models.TokenType.Embed,
                     accessToken: json.EmbedToken
                 };
-				
-		// <!-- Edit Mode -->	
-				// 	 var config = { 
-				// 	type: 'report', 
-				// 	tokenType: models.TokenType.Embed, 
-				// 	accessToken: json.EmbedToken,
-				// 	embedUrl: json.EmbedUrl, 
-				// 	id: json.Id,
-				// 	permissions: models.Permissions.All /*gives maximum permissions*/,
-				// 	viewMode: models.ViewMode.Edit, 
-				// 	settings: { 
-				// 		 filterPaneEnabled: true,
-				// 		navContentPaneEnabled: true 
-				// 	 } 
-				//  }; 
 
                 var $reportContainer = $('#reportContainer');
                 var report = powerbi.embed($reportContainer.get(0), config);
-
 
             },
             error: function () {
