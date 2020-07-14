@@ -38,8 +38,27 @@
             <h1 class="display-4">Power BI Embedded</h1>
             <p class="lead">A sample Sales and Marketing Report</p>
           </div>
-        <div class="container-fluid pd-0" >
-                <div id="reportContainer" align="center" style="height: 650px;" ></div>
+        <div class="container-fluid" >
+          <div class="row">
+            <div class="col-5">
+              <p class="font-weight-normal">Power BI Embedded offers you a way to incorporate Q&A into an application and allow your users to ask questions using natural language 
+                and receive immediate answers in the form of visuals like charts or graphs.</p>
+              <h4 class="lead">Enter a seach string below to generate a visual.</h3>
+              <div class="row">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Question?" aria-label="Question?" aria-describedby="basic-addon2" id="questioninp">
+                </div>
+                <div class="col col-lg-2">
+                  <button id="submit" type="button" class="btn btn-outline-secondary">Submit</button>
+                </div>
+              </div>
+              <br>
+              <div id="qnaContainer" align="center" style="height: 490px;" ></div>
+            </div>
+            <div class="col col-lg-7">
+              <div id="reportContainer" style="height: 650px;" ></div>
+            </div>
+          </div>
         </div>
 
         <!--Bootstrap 4 Scripts-->
@@ -58,7 +77,7 @@
 
         $.ajax({
             url: getEmbedToken,
-			type: 'GET',
+			      type: 'GET',
             dataType: "json",
             success: function (json) {
 
@@ -83,6 +102,49 @@
         });
 
     });
+
+//next function
+
+$("#submit").on('click',function(){
+
+var getEmbedToken = "https://pbiembeddedqna.azurewebsites.net/api/getqna";
+var models = window['powerbi-client'].models;
+var url = "https://app.powerbi.com/qnaEmbed?groupId=0b784589-ca42-4c17-9954-7bdfcd7f7110";
+
+$.ajax({
+    url: getEmbedToken,
+    type: 'GET',
+    dataType: "json",
+    success: function (json) {
+
+        var txtQuestion = $("#questioninp").val();
+        //var qnaMode = "ResultOnly";
+        var models = window['powerbi-client'].models;
+        
+//New Read Mode
+    var config1 = {
+        type: 'qna',
+        tokenType: models.TokenType.Embed,
+        accessToken: json.EmbedToken,
+        embedUrl: url,
+        datasetIds: [json.DatasetId],
+        viewMode: models.QnaMode.ResultOnly,
+        question: txtQuestion
+    };
+
+
+        var qnaContainer = $('#qnaContainer')[0];
+        var report = powerbi.embed(qnaContainer, config1);
+
+
+    },
+    error: function () {
+        alert("Error");
+    }
+});
+
+});
+
 </script>
 
 </html>
