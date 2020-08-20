@@ -73,7 +73,7 @@
     $(document).ready(function () {
         
 		
-		var getEmbedToken = "https://pbiembeddedqna.azurewebsites.net/api/generatetoken";
+		var getEmbedToken = "https://sumitkmr-powerbiembedded.azurewebsites.net/api/generateReportToken";
 
         $.ajax({
             url: getEmbedToken,
@@ -107,9 +107,9 @@
 
 $("#submit").on('click',function(){
 
-var getEmbedToken = "https://pbiembeddedqna.azurewebsites.net/api/getqna";
+var getEmbedToken = "https://sumitkmr-powerbiembedded.azurewebsites.net/api/generateQnaToken";
 var models = window['powerbi-client'].models;
-var url = "https://app.powerbi.com/qnaEmbed?groupId=0b784589-ca42-4c17-9954-7bdfcd7f7110";
+var url = "https://app.powerbi.com/qnaEmbed?groupId=15f9e869-a902-47de-8c27-63a92f570a20";
 
 $.ajax({
     url: getEmbedToken,
